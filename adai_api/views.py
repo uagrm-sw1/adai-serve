@@ -109,6 +109,7 @@ class HelloViewSet(viewsets.ViewSet):
 
         return Response({'http_method': 'DELETE'})
 
+
 class UserProfileViewSet(viewsets.ModelViewSet):
     """Handles creating, creating and updating profiles"""
 
@@ -118,6 +119,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.UpdateOwnProfile,)
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'email',)
+
 
 class UserLoginViewSet(ObtainAuthToken):
     """Checks email and password and returns an auth token"""
