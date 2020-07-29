@@ -14,6 +14,7 @@
 ** MIGRACIONES **
 
 `(venvadai) C:\User\Carp\` python manage.py makemigrations
+
 `(venvadai) C:\User\Carp\` python manage.py migrate
 
 `(venvadai) C:\User\Carp\` python manage.py runserver
@@ -22,7 +23,7 @@
 
 git commit y git push
 
-open `Git Bash` on Terminal
+Open `Git Bash` on Terminal
 
 `~` ssh ubuntu@ec2-3-134-80-247.us-east-2.compute.amazonaws.com
 
