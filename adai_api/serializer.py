@@ -3,17 +3,12 @@ from rest_framework import serializers
 from adai_api import models
 
 
-class HelloSerializer(serializers.Serializer):
-    """Serializes a name field for testing our APIView"""
-    name = serializers.CharField(max_length=10)
-
-
 class UserProfileSerializer(serializers.ModelSerializer):
     """Serializes a user profile object"""
 
     class Meta:
         model = models.UserProfile
-        fields = ('id', 'email', 'name', 'lastname', 'gender', 'password')
+        fields = ('id', 'email', 'name', 'lastname', 'date_of_birth', 'gender', 'password')
         extra_kwargs = {
             'password': {
                 'write_only': True,
@@ -27,6 +22,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             name=validated_data['name'],
             lastname=validated_data['lastname'],
+            date_of_birth=validated_data['date_of_birth'],
             gender=validated_data['gender'],
             password=validated_data['password'],
         )
@@ -42,10 +38,18 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 
-class ProfileFeedItemSerializer(serializers.ModelSerializer):
-    """Serializes profile feed items"""
+class EstudianteSerializado(serializers.ModelSerializer):
+    """Serializar datos del estudiante"""
 
     class Meta:
-        model = models.ProfileFeedItem
-        fields = ('id', 'user_profile', 'status_text', 'created_on')
+        model = models.Estudiante
+        fields = ('id', 'user_profile', 'student_name', 'student_lastname', 'date_of_birth', 'gender')
         extra_kwargs = {'user_profile': {'read_only': True}}
+
+
+class MateriaSerializado(serializers.ModelSerializer):
+    """Serializar datos de la materia"""
+
+    class Meta:
+        model = models.Materias
+        fields = ('id', 'subject_name')
