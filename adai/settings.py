@@ -26,7 +26,8 @@ SECRET_KEY = '9o=no*qbd6_ty3(d9cir%nrxx=+*(*dkwp6+4+7m96v@bpp)!p'
 DEBUG = False
 
 # Comentar cuando esta en el Local
-ALLOWED_HOSTS = ['127.0.0.1','ec2-3-134-80-247.us-east-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ['127.0.0.1',
+                 'ec2-3-134-80-247.us-east-2.compute.amazonaws.com']
 #ALLOWED_HOSTS = []
 
 # Application definition
@@ -125,4 +126,4 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'adai_api.UserProfile'
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

@@ -82,3 +82,11 @@ class Materias(models.Model):
     def __str__(self):
         """Retorna el modelo como una cadena"""
         return self.subject_name
+
+class Historico(models.Model):
+    """Modelo para el Historico"""
+
+    average = models.FloatField()
+
+class ExamenFinal(models.Model):
+    """Modelo para el Examen Final"""

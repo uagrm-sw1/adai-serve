@@ -8,7 +8,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.UserProfile
-        fields = ('id', 'email', 'name', 'lastname', 'date_of_birth', 'gender', 'password')
+        fields = ('id', 'email', 'name', 'lastname',
+                  'date_of_birth', 'gender', 'password')
         extra_kwargs = {
             'password': {
                 'write_only': True,
@@ -43,7 +44,8 @@ class EstudianteSerializado(serializers.ModelSerializer):
 
     class Meta:
         model = models.Estudiante
-        fields = ('id', 'user_profile', 'student_name', 'student_lastname', 'date_of_birth', 'gender')
+        fields = ('id', 'user_profile', 'student_name',
+                  'student_lastname', 'date_of_birth', 'gender')
         extra_kwargs = {'user_profile': {'read_only': True}}
 
 
