@@ -57,3 +57,80 @@ class MateriaViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializer.MateriaSerializado
     queryset = models.Materias.objects.all()
+
+
+class HistoricoViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.HistoricoSerializado
+    queryset = models.Historico.objects.all()
+
+
+class ExamenInicialViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.ExamenInicialSerializado
+    queryset = models.ExamenInicial.objects.all()
+
+
+class ExamenViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.ExamenSerializado
+    queryset = models.Examen.objects.all()
+
+
+class ContenidoViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.ContenidoSerializado
+    queryset = models.Contenido.objects.all()
+
+
+class PracticoViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.PracticoSerializado
+    queryset = models.Practico.objects.all()
+
+
+class TemaViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.TemaSerializado
+    queryset = models.Tema.objects.all()
+
+
+class NotaViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.NotaSerializado
+    queryset = models.Nota.objects.all()
+
+
+class EjercicioViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.EjercicioSerializado
+    queryset = models.Ejercicio.objects.all()
+
+
+class PreguntasExamenInicialViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.PreguntasExamenInicialSerializado
+    queryset = models.PreguntasExamenInicial.objects.all()
+
+
+class PreguntasExamenViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.PreguntasExamenSerializado
+    queryset = models.PreguntasExamen.objects.all()
+
+
+class PreguntasPracticoViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.PreguntasPracticoSerializado
+    queryset = models.PreguntasPractico.objects.all()

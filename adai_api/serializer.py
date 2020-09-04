@@ -55,3 +55,92 @@ class MateriaSerializado(serializers.ModelSerializer):
     class Meta:
         model = models.Materias
         fields = ('id', 'subject_name')
+
+
+class HistoricoSerializado(serializers.ModelSerializer):
+    """Serializar datos del historico"""
+
+    class Meta:
+        model = models.Historico
+        fields = ('id', 'alumno_id', 'average')
+
+
+class ExamenInicialSerializado(serializers.ModelSerializer):
+    """Serializar datos del Examen Inicial"""
+
+    class Meta:
+        model = models.ExamenInicial
+        fields = ('id', 'alumno_id', 'nota')
+
+
+class ExamenSerializado(serializers.ModelSerializer):
+    """Serializar datos del Examen"""
+
+    class Meta:
+        model = models.Examen
+        fields = ('id', 'tema_id', 'nota', 'cantidad_ejercicio')
+
+
+class ContenidoSerializado(serializers.ModelSerializer):
+    """Serializar datos del Contenido"""
+
+    class Meta:
+        model = models.Contenido
+        fields = ('id', 'tema_id', 'tipo', 'elemento')
+
+
+class PracticoSerializado(serializers.ModelSerializer):
+    """Serializar datos del Practico"""
+
+    class Meta:
+        model = models.Practico
+        fields = ('id', 'tema_id', 'nombre', 'nota', 'cantidad_ejercicio')
+
+
+class TemaSerializado(serializers.ModelSerializer):
+    """Serializar datos de Tema"""
+
+    class Meta:
+        model = models.Tema
+        fields = ('id', 'materia_id', 'titulo', 'duracion')
+
+
+class NotaSerializado(serializers.ModelSerializer):
+    """Serializar datos de Nota"""
+
+    class Meta:
+        model = models.Nota
+        fields = ('id', 'historico_id', 'alumno_id',
+                  'materias_id', 'materias_id', 'nota')
+
+
+class EjercicioSerializado(serializers.ModelSerializer):
+    """"Serializar datos de Ejercicio"""
+
+    class Meta:
+        model = models.Ejercicio
+        fields = ('id', 'pregunta')
+
+
+class PreguntasExamenInicialSerializado(serializers.ModelSerializer):
+    """Serializar datos de Preguntas de Examen Inicial"""
+
+    class Meta:
+        model = models.PreguntasExamenInicial
+        fields = ('id', 'ejercicio_id', 'examen_inicial_id')
+
+
+class PreguntasExamenSerializado(serializers.ModelSerializer):
+    """Serializar datos de Preguntas de Examen"""
+
+    class Meta:
+        model = models.PreguntasExamen
+        fields = ('id', 'ejercicio_id', 'examen_id')
+
+
+class PreguntasPracticoSerializado(serializers.ModelSerializer):
+    """Serializar datos de Preguntas de Practico"""
+
+    class Meta:
+        model = models.PreguntasPractico
+        fields = ('id', 'ejercicio_id', 'practica_id')
