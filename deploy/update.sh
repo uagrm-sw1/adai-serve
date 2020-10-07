@@ -5,8 +5,9 @@ set -e
 PROJECT_BASE_PATH='/usr/local/apps/adai-serve'
 
 git pull
+$PROJECT_BASE_PATH/env/bin/python manage.py makemigrations
 $PROJECT_BASE_PATH/env/bin/python manage.py migrate
 $PROJECT_BASE_PATH/env/bin/python manage.py collectstatic --noinput
-supervisorctl restart profiles_api
+supervisorctl restart all
 
 echo "DONE! :)"
