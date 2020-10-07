@@ -52,6 +52,13 @@ class EstudianteViewSet(viewsets.ModelViewSet):
         serializer.save(user_profile=self.request.user)
 
 
+class CursoViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating profile feed items."""
+
+    serializer_class = serializer.CursoSerializado
+    queryset = models.Curso.objects.all()
+
+
 class MateriaViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating profile feed items."""
 
@@ -87,13 +94,6 @@ class ContenidoViewSet(viewsets.ModelViewSet):
     queryset = models.Contenido.objects.all()
 
 
-class PracticoViewSet(viewsets.ModelViewSet):
-    """Handles creating, reading and updating profile feed items."""
-
-    serializer_class = serializer.PracticoSerializado
-    queryset = models.Practico.objects.all()
-
-
 class TemaViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating profile feed items."""
 
@@ -115,22 +115,22 @@ class EjercicioViewSet(viewsets.ModelViewSet):
     queryset = models.Ejercicio.objects.all()
 
 
-class PreguntasExamenInicialViewSet(viewsets.ModelViewSet):
+class EjercicioExamenInicialViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating profile feed items."""
 
-    serializer_class = serializer.PreguntasExamenInicialSerializado
-    queryset = models.PreguntasExamenInicial.objects.all()
+    serializer_class = serializer.EjercicioExamenInicialSerializado
+    queryset = models.EjercicioExamenInicial.objects.all()
 
 
-class PreguntasExamenViewSet(viewsets.ModelViewSet):
+class EjercicioExamenViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating profile feed items."""
 
-    serializer_class = serializer.PreguntasExamenSerializado
-    queryset = models.PreguntasExamen.objects.all()
+    serializer_class = serializer.EjercicioExamenSerializado
+    queryset = models.EjercicioExamen.objects.all()
 
 
-class PreguntasPracticoViewSet(viewsets.ModelViewSet):
+class RespuestaViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating profile feed items."""
 
-    serializer_class = serializer.PreguntasPracticoSerializado
-    queryset = models.PreguntasPractico.objects.all()
+    serializer_class = serializer.RespuestaSerializado
+    queryset = models.Respuesta.objects.all()

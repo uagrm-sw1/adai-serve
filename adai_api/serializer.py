@@ -49,12 +49,20 @@ class EstudianteSerializado(serializers.ModelSerializer):
         extra_kwargs = {'user_profile': {'read_only': True}}
 
 
+class CursoSerializado(serializers.ModelSerializer):
+    """Serializar datos de la materia"""
+
+    class Meta:
+        model = models.Curso
+        fields = ('id', 'grado')
+
+
 class MateriaSerializado(serializers.ModelSerializer):
     """Serializar datos de la materia"""
 
     class Meta:
         model = models.Materias
-        fields = ('id', 'subject_name')
+        fields = ('id', 'curso_id', 'subject_name')
 
 
 class HistoricoSerializado(serializers.ModelSerializer):
@@ -78,7 +86,7 @@ class ExamenSerializado(serializers.ModelSerializer):
 
     class Meta:
         model = models.Examen
-        fields = ('id', 'tema_id', 'nota', 'cantidad_ejercicio')
+        fields = ('id', 'tema_id', 'cantidad_ejercicio')
 
 
 class ContenidoSerializado(serializers.ModelSerializer):
@@ -87,14 +95,6 @@ class ContenidoSerializado(serializers.ModelSerializer):
     class Meta:
         model = models.Contenido
         fields = ('id', 'tema_id', 'tipo', 'elemento')
-
-
-class PracticoSerializado(serializers.ModelSerializer):
-    """Serializar datos del Practico"""
-
-    class Meta:
-        model = models.Practico
-        fields = ('id', 'tema_id', 'nombre', 'nota', 'cantidad_ejercicio')
 
 
 class TemaSerializado(serializers.ModelSerializer):
@@ -110,8 +110,8 @@ class NotaSerializado(serializers.ModelSerializer):
 
     class Meta:
         model = models.Nota
-        fields = ('id', 'historico_id', 'alumno_id',
-                  'materias_id', 'materias_id', 'nota')
+        fields = ('id', 'historico_id', 'alumno_id', 'curso_id',
+                  'materias_id', 'nota')
 
 
 class EjercicioSerializado(serializers.ModelSerializer):
@@ -119,28 +119,28 @@ class EjercicioSerializado(serializers.ModelSerializer):
 
     class Meta:
         model = models.Ejercicio
-        fields = ('id', 'pregunta')
+        fields = ('id', 'pregunta', 'tipo')
 
 
-class PreguntasExamenInicialSerializado(serializers.ModelSerializer):
+class EjercicioExamenInicialSerializado(serializers.ModelSerializer):
     """Serializar datos de Preguntas de Examen Inicial"""
 
     class Meta:
-        model = models.PreguntasExamenInicial
+        model = models.EjercicioExamenInicial
         fields = ('id', 'ejercicio_id', 'examen_inicial_id')
 
 
-class PreguntasExamenSerializado(serializers.ModelSerializer):
+class EjercicioExamenSerializado(serializers.ModelSerializer):
     """Serializar datos de Preguntas de Examen"""
 
     class Meta:
-        model = models.PreguntasExamen
+        model = models.EjercicioExamen
         fields = ('id', 'ejercicio_id', 'examen_id')
 
 
-class PreguntasPracticoSerializado(serializers.ModelSerializer):
-    """Serializar datos de Preguntas de Practico"""
+class RespuestaSerializado(serializers.ModelSerializer):
+    """Serializar datos de Preguntas de Exmane"""
 
     class Meta:
-        model = models.PreguntasPractico
-        fields = ('id', 'ejercicio_id', 'practica_id')
+        model = models.Respuesta
+        fields = ('id', 'ejercicio_id', 'contenido', 'esCorrecto')

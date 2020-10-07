@@ -87,50 +87,49 @@ class Estudiante(models.Model):
 # 3
 
 
+class Curso(models.Model):
+
+    grado = models.CharField(max_length=50)
+
+    def __str__(self):
+        """Retorna el modelo como una cadena"""
+        return self.grado
+
+
+# 4
+
+
 class Materias(models.Model):
     """Modelo para las Materias"""
 
+    curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
     subject_name = models.CharField(max_length=50)
 
     def __str__(self):
         """Retorna el modelo como una cadena"""
         return self.subject_name
 
-# 4
+# 5
 
 
 class Historico(models.Model):
     """Modelo para el Historico"""
 
-    alumno_id = models.IntegerField()
+    alumno_id = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
     average = models.FloatField()
 
     def __str__(self):
         """Retorna el modelo como una cadena"""
         return self.average
 
-# 5
+# 6
 
 
 class ExamenInicial(models.Model):
     """Modelo para el Examen Inicial"""
 
-    alumno_id = models.IntegerField()
+    alumno_id = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
     nota = models.FloatField()
-
-    def __str__(self):
-        """Retorna el modelo como una cadena"""
-        return self.nota
-
-# 6
-
-
-class Examen(models.Model):
-    """Modelo para el Examen"""
-
-    tema_id = models.IntegerField()
-    nota = models.FloatField()
-    cantidad_ejercicio = models.IntegerField()
 
     def __str__(self):
         """Retorna el modelo como una cadena"""
@@ -139,39 +138,10 @@ class Examen(models.Model):
 # 7
 
 
-class Contenido(models.Model):
-    """Contenido de las materias"""
-
-    tema_id = models.IntegerField()
-    tipo = models.CharField(max_length=50)
-    elemento = models.CharField(max_length=50)
-
-    def __str__(self):
-        """Retorna el modelo como una cadena"""
-        return self.tipo
-
-# 8
-
-
-class Practico(models.Model):
-    """Modelo para el Practico"""
-
-    tema_id = models.IntegerField()
-    nombre = models.CharField(max_length=50)
-    nota = models.FloatField()
-    cantidad_ejercicio = models.IntegerField()
-
-    def __str__(self):
-        """Retorna el modelo como una cadena"""
-        return self.nombre
-
-# 9
-
-
 class Tema(models.Model):
     """Modelo para el Tema"""
 
-    materia_id = models.IntegerField()
+    materia_id = models.ForeignKey(Materias, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=50)
     duracion = models.IntegerField()
 
@@ -179,15 +149,41 @@ class Tema(models.Model):
         """Retorna el modelo como una cadena"""
         return self.titulo
 
+
+# 8
+
+class Examen(models.Model):
+    """Modelo para el Examen"""
+
+    tema_id = models.ForeignKey(Tema, on_delete=models.CASCADE)
+    cantidad_ejercicio = models.IntegerField()
+
+    def __str__(self):
+        """Retorna el modelo como una cadena"""
+        return self.cantidad_ejercicio
+
+# 9
+
+
+class Contenido(models.Model):
+    """Contenido de las materias"""
+
+    tema_id = models.ForeignKey(Tema, on_delete=models.CASCADE)
+    tipo = models.CharField(max_length=50)
+    elemento = models.CharField(max_length=255)
+
+    def __str__(self):
+        """Retorna el modelo como una cadena"""
+        return self.tipo
+
 # 10
 
 
 class Nota(models.Model):
     """Modelo para el Nota"""
-
-    historico_id = models.IntegerField()
-    alumno_id = models.IntegerField()
-    materias_id = models.IntegerField()
+    historico_id = models.ForeignKey(Historico, on_delete=models.CASCADE)
+    curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    materias_id = models.ForeignKey(Materias, on_delete=models.CASCADE)
     nota = models.FloatField()
 
     def __str__(self):
@@ -201,6 +197,7 @@ class Ejercicio(models.Model):
     """Modelo para los ejercicios"""
 
     pregunta = models.CharField(max_length=255)
+    tipo = models.CharField(max_length=32, default="selector")
 
     def __str__(self):
         """Retorna el modelo como una cadena"""
@@ -209,38 +206,40 @@ class Ejercicio(models.Model):
 # 12
 
 
-class PreguntasExamenInicial(models.Model):
-    """Modelo para la relacion entre Ejercicio y sus Composiciones"""
+class EjercicioExamen(models.Model):
+    """Modelo para los ejercicios"""
 
-    ejercicio_id = models.IntegerField()
-    examen_inicial_id = models.IntegerField()
+    examen_id = models.ForeignKey(Examen, on_delete=models.CASCADE)
+    ejercicio_id = models.ForeignKey(Ejercicio, on_delete=models.CASCADE)
 
     def __str__(self):
-        """Retorna el modelo como una cadena"""
-        return self.ejercicio_id
+        """Retorna el modelo como una cadenas"""
+        return self.examen_id
 
 # 13
 
 
-class PreguntasExamen(models.Model):
-    """Modelo para la relacion entre Ejercicio y sus Composiciones"""
+class EjercicioExamenInicial(models.Model):
+    """Modelo para los ejercicios"""
 
-    ejercicio_id = models.IntegerField()
-    examen_id = models.IntegerField()
+    examen_inicial_id = models.ForeignKey(
+        ExamenInicial, on_delete=models.CASCADE)
+    ejercicio_id = models.ForeignKey(Ejercicio, on_delete=models.CASCADE)
 
     def __str__(self):
-        """Retorna el modelo como una cadena"""
-        return self.ejercicio_id
+        """Retorna el modelo como una cadenas"""
+        return self.examen_inicial_id
 
 # 14
 
 
-class PreguntasPractico(models.Model):
-    """Modelo para la relacion entre Ejercicio y sus Composiciones"""
+class Respuesta(models.Model):
+    """Modelo para almacenar distintas respuestas"""
 
-    ejercicio_id = models.IntegerField()
-    practica_id = models.IntegerField()
+    ejercicio_id = models.ForeignKey(Ejercicio, on_delete=models.CASCADE)
+    contenido = models.CharField(max_length=128)
+    esCorrecto = models.BooleanField()
 
     def __str__(self):
         """Retorna el modelo como una cadena"""
-        return self.ejercicio_id
+        return self.contenido

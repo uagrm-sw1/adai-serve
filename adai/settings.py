@@ -27,7 +27,7 @@ DEBUG = False
 
 # Comentar cuando esta en el Local
 ALLOWED_HOSTS = ['127.0.0.1',
-                 'ec2-3-134-80-247.us-east-2.compute.amazonaws.com']
+                 'http://ec2-3-21-164-122.us-east-2.compute.amazonaws.com/']
 #ALLOWED_HOSTS = []
 
 # Application definition
