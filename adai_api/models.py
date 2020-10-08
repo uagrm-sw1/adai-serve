@@ -102,7 +102,6 @@ class Curso(models.Model):
 class Materias(models.Model):
     """Modelo para las Materias"""
 
-    curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
     subject_name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -116,11 +115,11 @@ class Historico(models.Model):
     """Modelo para el Historico"""
 
     alumno_id = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
-    average = models.FloatField()
+    promedio = models.FloatField()
 
     def __str__(self):
         """Retorna el modelo como una cadena"""
-        return self.average
+        return self.promedio
 
 # 6
 
@@ -142,6 +141,7 @@ class Tema(models.Model):
     """Modelo para el Tema"""
 
     materia_id = models.ForeignKey(Materias, on_delete=models.CASCADE)
+    curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=50)
     duracion = models.IntegerField()
 
@@ -182,8 +182,7 @@ class Contenido(models.Model):
 class Nota(models.Model):
     """Modelo para el Nota"""
     historico_id = models.ForeignKey(Historico, on_delete=models.CASCADE)
-    curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
-    materias_id = models.ForeignKey(Materias, on_delete=models.CASCADE)
+    tema_id = models.ForeignKey(Tema, on_delete=models.CASCADE)
     nota = models.FloatField()
 
     def __str__(self):

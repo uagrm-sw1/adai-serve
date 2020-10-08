@@ -62,7 +62,7 @@ class MateriaSerializado(serializers.ModelSerializer):
 
     class Meta:
         model = models.Materias
-        fields = ('id', 'curso_id', 'subject_name')
+        fields = ('id', 'subject_name')
 
 
 class HistoricoSerializado(serializers.ModelSerializer):
@@ -70,7 +70,7 @@ class HistoricoSerializado(serializers.ModelSerializer):
 
     class Meta:
         model = models.Historico
-        fields = ('id', 'alumno_id', 'average')
+        fields = ('id', 'alumno_id', 'promedio')
 
 
 class ExamenInicialSerializado(serializers.ModelSerializer):
@@ -102,7 +102,7 @@ class TemaSerializado(serializers.ModelSerializer):
 
     class Meta:
         model = models.Tema
-        fields = ('id', 'materia_id', 'titulo', 'duracion')
+        fields = ('id', 'materia_id', 'curso_id', 'titulo', 'duracion')
 
 
 class NotaSerializado(serializers.ModelSerializer):
@@ -110,8 +110,7 @@ class NotaSerializado(serializers.ModelSerializer):
 
     class Meta:
         model = models.Nota
-        fields = ('id', 'historico_id', 'alumno_id', 'curso_id',
-                  'materias_id', 'nota')
+        fields = ('id', 'historico_id', 'tema_id', 'nota')
 
 
 class EjercicioSerializado(serializers.ModelSerializer):
